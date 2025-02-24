@@ -1,11 +1,11 @@
 #pragma once
-#include "../include/utils/error.hpp"
+#include "utils/error.hpp"
 #include <variant>
 namespace Bkornblume {
 class ArrayNode {
 private:
     std::variant<ArrayNode **, int *> data;
-    size_t size     = 0;
+    int size        = 0;
     ArrayNode **nxt = nullptr;
 
 public:
