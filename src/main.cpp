@@ -5,7 +5,7 @@
 int main() {
     Bkornblume::Program program;
     try {
-        program.Parser();
+        program.Parser("");
     } catch (const Bkornblume::ErrorBase &e) {
         std::cerr << e.what() << std::endl;
         return -1;

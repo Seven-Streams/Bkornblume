@@ -54,7 +54,7 @@ unit_test::unit_test(std::string name, Fn_t fn, std::source_location loc) {
     impl.tests.push_back({std::move(fn), std::move(name), loc});
 }
 
-auto unit_test::run_all(test_config cfg) noexcept -> void {
+auto unit_test::run_all(test_config cfg) noexcept -> bool {
     const auto tests = [] { // move tests out of the structure
         auto &impl = get_structure();
         auto guard = std::lock_guard{impl.mutex};
@@ -72,6 +72,7 @@ auto unit_test::run_all(test_config cfg) noexcept -> void {
     auto cout_guard = stream_guard{NO_STDOUT <= cfg ? &std::cout : nullptr, {}, terr};
     auto cerr_guard = stream_guard{NO_STDERR <= cfg ? &std::cerr : nullptr, {}, terr};
 
+    auto failure        = false;
     auto failing_reason = std::string{};
     for (const auto &[fn, name, loc] : tests) {
         try {
@@ -89,7 +90,10 @@ auto unit_test::run_all(test_config cfg) noexcept -> void {
             "\033[1;31mFAILED\033[0m: {} ({}:{})\n", name, loc.file_name(), loc.line()
         );
         terr << std::format("  Reason: {}\n", failing_reason);
+        failure = true;
     }
+
+    return failure;
 }
 
 auto unit_test::ostream() noexcept -> std::ostream & {

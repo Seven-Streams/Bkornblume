@@ -1,0 +1,21 @@
+on: [push]
+
+jobs:
+  build_cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+
+      - name: Install GCC
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++
+
+      - name: Set up xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+
+      - name: Build and run unit tests
+        run: xmake && xmake run unit_test
