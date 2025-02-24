@@ -78,7 +78,7 @@ struct unit_test {
     using Loc_t = std::source_location;
 
     explicit unit_test(std::string, Fn_t, Loc_t = Loc_t::current());
-    static auto run_all(test_config = test_config::NO_STDOUT) noexcept -> void;
+    static auto run_all(test_config = test_config::NO_STDOUT) noexcept -> bool;
 
     static auto ostream() noexcept -> std::ostream &;
     static auto estream() noexcept -> std::ostream &;
