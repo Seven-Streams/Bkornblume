@@ -1,5 +1,4 @@
-#ifndef INSTRUCTIONS_HPP
-#define INSTRUCTIONS_HPP
+#pragma once
 
 /*
     The base class of all instructions.
@@ -42,4 +41,3 @@ public:
   void Execute();
 };
 } // namespace Bkornblume
-#endif

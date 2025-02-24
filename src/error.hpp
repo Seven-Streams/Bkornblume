@@ -1,5 +1,4 @@
-#ifndef ERROR_HPP
-#define ERROR_HPP
+#pragma once
 #include <string>
 namespace Bkornblume {
 class MyError {
@@ -12,5 +11,3 @@ public:
   std::string GetErrorMsg() { return *error_msg; }
 };
 } // namespace Bkornblume
-
-#endif
