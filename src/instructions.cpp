@@ -1,3 +1,7 @@
 #include "instructions.hpp"
 
-void Bkornblume::Instruction::Execute() {};
+namespace Bkornblume {
+
+void Instruction::Execute() {}
+
+} // namespace Bkornblume
