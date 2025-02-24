@@ -1,7 +1,6 @@
 #pragma once
-#include "error.hpp"
-#include <iostream>
 #include <variant>
+#include "../include/utils/error.hpp"
 namespace Bkornblume {
 class ArrayNode {
 private:
@@ -21,17 +20,17 @@ public:
   }
   std::variant<ArrayNode *, int *> Get(int first_index, int second_index) {
     if (first_index >= size) {
-      throw MyError("Index out of range");
+      throw UserError("Index out of range");
     }
     if (std::holds_alternative<ArrayNode **>(data)) {
       return std::get<ArrayNode **>(data)[first_index]->Get(second_index);
     } else {
-      throw MyError("Integer don't have any child");
+      throw  UserError("Integer don't have any child");
     }
   }
   std::variant<ArrayNode *, int *> Get(int index) {
     if (index >= size) {
-      throw MyError("Index out of range");
+      throw  UserError("Index out of range");
     }
     if (std::holds_alternative<ArrayNode **>(data)) {
       return std::get<ArrayNode **>(data)[index];

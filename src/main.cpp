@@ -1,5 +1,5 @@
-#include "program.hpp"
-#include "utils/error.hpp"
+#include "../include/program.hpp"
+#include "../include/utils/error.hpp"
 #include <iostream>
 
 int main() {
