@@ -1,15 +1,15 @@
-#include "error.hpp"
+#include "utils/error.hpp"
 #include <iostream>
 
 int main() {
-  std::string res;
-  try {
-    while (std::cin >> res) {
-      //TODO:Finish the parser.
+    std::string res;
+    try {
+        while (std::cin >> res) {
+            // TODO:Finish the parser.
+        }
+    } catch (Bkornblume::ErrorBase &e) {
+        std::cout << e.what() << std::endl;
+        return -1;
     }
-  } catch (Bkornblume::MyError &e) {
-    std::cout << e.GetErrorMsg() << std::endl;
-    return -1;
-  }
-  return 0;
+    return 0;
 }
