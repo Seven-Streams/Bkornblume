@@ -1,14 +1,13 @@
-#include "utils/error.hpp"
+#include "error.hpp"
+#include "program.hpp"
 #include <iostream>
 
 int main() {
-    std::string res;
+    Bkornblume::Program program;
     try {
-        while (std::cin >> res) {
-            // TODO:Finish the parser.
-        }
-    } catch (Bkornblume::ErrorBase &e) {
-        std::cout << e.what() << std::endl;
+        program.Parser();
+    } catch (Bkornblume::MyError &e) {
+        std::cout << e.GetErrorMsg() << std::endl;
         return -1;
     }
     return 0;
