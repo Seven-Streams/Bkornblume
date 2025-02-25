@@ -1,11 +1,11 @@
 #pragma once
-#include<vector>
-#include<string>
+#include <string>
+#include <vector>
 
 std::vector<std::string> Slice(std::string str, char delim = ' ') {
     std::vector<std::string> tokens;
     int last = 0;
-    if((int)str.find(';') != -1) {
+    if (str.find(';') != std::string::npos) {
         str = str.substr(0, str.find(';'));
     }
     for (size_t i = 0; i < str.size(); i++) {

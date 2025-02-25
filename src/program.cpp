@@ -2,8 +2,8 @@
 #include "utils/error.hpp"
 #include "utils/tokens.hpp"
 #include <cstdlib>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <unordered_map>
 #include <variant>
@@ -34,13 +34,14 @@ void Program::Parser(std::string path) {
             This part is to check tag the entry of the function.
         */
         if (tokens.front() == "define") {
-            std::string function_name       = (int)tokens[1].find('(') == -1
+            std::string function_name       = tokens[1].find('(') == std::string::npos
                                                 ? tokens[1]
                                                 : tokens[1].substr(0, tokens[1].find('('));
             function_entries[function_name] = i;
             now_func                        = function_name;
             labels[function_name]           = std::unordered_map<std::string, int>();
         }
+
         /*
             This part is to check the end of the function.
         */
@@ -60,7 +61,7 @@ void Program::Parser(std::string path) {
         */
         if (original_code[i][0] == '@') {
             for (size_t i = 0; i < tokens.size(); i++) {
-                if (tokens[i].find("global") != std::variant_npos) {
+                if (tokens[i].find("global") != std::string::npos) {
                     if (tokens[i + 1] == "i1") {
                         if (tokens[i + 2] == "true") {
                             global_variable[tokens[i]] = new int(1);
@@ -73,7 +74,8 @@ void Program::Parser(std::string path) {
                                 global_variable[tokens[i]] = new int(std::stoi(tokens[i + 2]));
                             } else {
                                 global_variable[tokens[i]] = new int(std::rand());
-                                std::cout << "Warning: the value of " << tokens[i] << " is not initialized" << std::endl;
+                                std::cout << "Warning: the value of " << tokens[i]
+                                          << " is not initialized" << std::endl;
                             }
                         } else {
                             global_variable[tokens[i]] = new ArrayNode();

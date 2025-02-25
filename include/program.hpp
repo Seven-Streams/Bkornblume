@@ -17,18 +17,18 @@ private:
     std::unordered_map<std::string, int> function_entries;
 
 public:
-    Program()  = default;
-    ~Program(){
-        for(auto i: global_variable) {
-            if(std::holds_alternative<ArrayNode *>(i.second)) {
+    Program() = default;
+    ~Program() {
+        for (auto i : global_variable) {
+            if (std::holds_alternative<ArrayNode *>(i.second)) {
                 delete std::get<ArrayNode *>(i.second);
             } else {
                 delete std::get<int *>(i.second);
             }
         }
-        while(!variable_stack.empty()) {
-            for(auto i: variable_stack.top()) {
-                if(std::holds_alternative<ArrayNode *>(i.second)) {
+        while (!variable_stack.empty()) {
+            for (auto i : variable_stack.top()) {
+                if (std::holds_alternative<ArrayNode *>(i.second)) {
                     delete std::get<ArrayNode *>(i.second);
                 } else {
                     delete std::get<int *>(i.second);
